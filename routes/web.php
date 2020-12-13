@@ -6,6 +6,6 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::name('admin.')->group(function () {
+Route::name('admin.')->prefix('/admin')->group(function () {
     Route::get('/', 'HomeController@index');
 });
