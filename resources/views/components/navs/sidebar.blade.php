@@ -7,19 +7,17 @@
 
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <x-navs.parts.nav-item 
-                    label="Membros" route="{{route('admin.home')}}" icon="fas fa-users" active="{{$active}}"/>
+                <x-navs.parts.nav-item label="Membros" icon="fas fa-users" active="{{$active}}">
+                    <x-navs.parts.nav-item 
+                        label="Administração" route="{{route('membros.administracao')}}" icon="far fa-circle" active="{{$active}}"/>
+                    <x-navs.parts.nav-item 
+                        label="Staff" route="{{route('membros.staff')}}" icon="far fa-circle" active="{{$active}}"/>
+                    <x-navs.parts.nav-item 
+                        label="Elenco" route="{{route('membros.elenco')}}" icon="far fa-circle" active="{{$active}}"/>
+                </x-navs.parts.nav-item>
                 
-                <x-navs.parts.nav-item label="Equipes" icon="fas fa-sitemap" active="{{$active}}">
-                    <x-navs.parts.nav-item 
-                        label="Lycans Blue" route="{{route('admin.home')}}" icon="far fa-circle" active="{{$active}}"/>
-                    <x-navs.parts.nav-item 
-                        label="Lycans Red" route="{{route('admin.home')}}" icon="far fa-circle" active="{{$active}}"/>
-                    <x-navs.parts.nav-item 
-                        label="Lycans Prime" route="{{route('admin.home')}}" icon="far fa-circle" active="{{$active}}"/>
-                    <x-navs.parts.nav-item 
-                        label="Lycans Girlz" route="{{route('admin.home')}}" icon="far fa-circle" active="{{$active}}"/>
-                </x-navs.parts.nav-item> 
+                <x-navs.parts.nav-item 
+                    label="Equipes" route="{{route('equipes.lista')}}" icon="fas fa-sitemap" active="{{$active}}"/>
             </ul>
         </nav>
     </div>

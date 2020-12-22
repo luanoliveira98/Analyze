@@ -1,4 +1,4 @@
-<li class="nav-item @if(!$route) menu-open @endif">
+<li class="nav-item @if($active) menu-open @endif">
     <a href="@if($route){{$route}}@else # @endif" class="nav-link @if($active) active @endif">
         <i class="nav-icon {{$icon}}"></i>
         <p> 

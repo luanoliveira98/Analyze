@@ -13,7 +13,7 @@ class HomeController extends Controller
             "usuarios" => Usuario::count()
         );
         // dd($quantidades->usuarios);
-        return view('admin.dashboard.home')
+        return view('dashboard.home')
                 ->with('quantidades', $quantidades);
     }
 }

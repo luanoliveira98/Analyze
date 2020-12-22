@@ -1,0 +1,8 @@
+<x-layouts.admin title="Dashboard" active="membros">
+    <div class="row">
+        <x-dashboard.widget count="6" label="Administração" icon="fas fa-users" route="{{route('membros.administracao')}}"/>
+        <x-dashboard.widget count="43" label="Elenco" icon="fas fa-users" route="{{route('membros.elenco')}}"/>
+        <x-dashboard.widget count="9" label="Staff" icon="fas fa-users" route="{{route('membros.staff')}}"/>
+        <x-dashboard.widget count="4" label="Equipes" icon="fas fa-sitemap" route="{{route('equipes.lista')}}"/>
+    </div>
+</x-layouts.admin>
