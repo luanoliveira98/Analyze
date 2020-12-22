@@ -12,6 +12,6 @@ Route::prefix('/')->group(function () {
     });
 
     Route::name('equipes.')->prefix('/equipes')->group(function () {
-        Route::get('/', 'HomeController@index')->name('lista');
+        Route::get('/', 'EquipeController@index')->name('lista');
     });
 });

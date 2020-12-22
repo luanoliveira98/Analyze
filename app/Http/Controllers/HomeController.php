@@ -12,7 +12,7 @@ class HomeController extends Controller
         $quantidades = (object) array(
             "usuarios" => Usuario::count()
         );
-        // dd($quantidades->usuarios);
+        
         return view('dashboard.home')
                 ->with('quantidades', $quantidades);
     }
