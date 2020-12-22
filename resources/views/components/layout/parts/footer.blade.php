@@ -1,7 +1,7 @@
 <footer class="main-footer">
-    <strong>Copyright &copy; 2020 <a href="#">Luan Oliveira</a>.</strong>
+    <strong>Copyright &copy; 2020 @if(date("Y") != 2020) - {{date("Y")}} @endif <a href="#">Luan Oliveira</a>.</strong>
     Todos direitos reservados.
     <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 0.1
+      <b>Versão</b> {{config('infos.version')}}
     </div>
 </footer>
