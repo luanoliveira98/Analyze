@@ -6,14 +6,14 @@
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item @if($currentPage=='home') active @endif">
             <a class="nav-link" href="{{route('admin.home')}}">Home
-                @if($active=='home')<span class="sr-only">(current)</span>@endif
+                @if($currentPage=='home')<span class="sr-only">(current)</span>@endif
             </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item @if($currentPage=='usuario') active @endif">
                 <a class="nav-link" href="{{route('admin.home')}}">Usuários
-                    @if($active=='usuario')<span class="sr-only">(current)</span>@endif
+                    @if($currentPage=='usuario')<span class="sr-only">(current)</span>@endif
                 </a>
             </li>
         </ul>
