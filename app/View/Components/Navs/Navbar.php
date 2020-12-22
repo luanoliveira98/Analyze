@@ -7,13 +7,19 @@ use Illuminate\View\Component;
 class Navbar extends Component
 {
     /**
+     * Página atual da aba.
+     *
+     * @var string
+     */
+    public $currentPage;
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($currentPage)
     {
-        //
+        $this->currentPage = $currentPage;
     }
 
     /**
