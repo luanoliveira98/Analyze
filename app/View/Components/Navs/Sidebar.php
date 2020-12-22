@@ -7,13 +7,20 @@ use Illuminate\View\Component;
 class Sidebar extends Component
 {
     /**
+     * Página ativa.
+     *
+     * @var string
+     */
+    public $active;
+    
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($active)
     {
-        //
+        $this->active = $active;
     }
 
     /**
