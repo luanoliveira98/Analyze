@@ -14,20 +14,21 @@ class Admin extends Component
     public $title;
 
     /**
-     * Página atual da aba.
+     * Página ativa.
      *
      * @var string
      */
-    public $currentPage;
+    public $active;
+    
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($title, $currentPage)
+    public function __construct($title, $active)
     {
         $this->title = $title;
-        $this->currentPage = $currentPage;
+        $this->active = $active;
     }
 
     /**
