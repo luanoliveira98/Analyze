@@ -1,4 +1,4 @@
-<x-layouts.admin title="Dashboard" active="membros">
+<x-layouts.admin title="Home" active="home">
     <div class="row">
         <x-dashboard.widget count="6" label="Administração" icon="fas fa-user-tie" route="{{route('membros.administracao')}}"/>
         <x-dashboard.widget count="9" label="Staff" icon="fas fa-user-graduate" route="{{route('membros.staff')}}"/>

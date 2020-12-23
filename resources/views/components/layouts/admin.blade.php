@@ -13,15 +13,10 @@
             <x-navs.sidebar active={{$active}}/>
 
             <div class="content-wrapper">
-                <div class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <h1 class="m-0">{{$title}}</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <x-layouts.parts.header title={{$title}} active={{$active}}>
+                    <x-breadcrumbs.base/>
+                </x-layouts.parts.header>
+                
                 <section class="content">
                     <div class="container-fluid">
                         {{$slot}}
@@ -30,7 +25,7 @@
             </div>
         </div>
 
-        <x-layout.parts.footer/>
+        <x-layouts.parts.footer/>
         <x-layouts.js.admin/>
     </body>
 </html>
