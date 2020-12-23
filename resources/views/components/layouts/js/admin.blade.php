@@ -1,4 +1,5 @@
 <script src="{{ asset('js/app.js') }}" defer></script><!-- jQuery -->
+<!-- jQuery -->
 <script src="../../../plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="../../../plugins/jquery-ui/jquery-ui.min.js"></script>
@@ -28,7 +29,3 @@
 <script src="../../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../../dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../../dist/js/demo.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../../../dist/js/pages/dashboard.js"></script>

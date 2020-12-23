@@ -29,4 +29,11 @@ class Controller extends BaseController
             ),
         );
     }
+
+    public function getThead($data)
+    {
+        $thead = array_keys($data->first()->toArray());
+
+        return $thead;
+    }
 }

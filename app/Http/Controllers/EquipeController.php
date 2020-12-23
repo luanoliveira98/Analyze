@@ -12,10 +12,13 @@ class EquipeController extends Controller
 
     public function index()
     {
-        $equipes = Equipe::all();
+        $equipes = Equipe::select('id', 'nome')->get();
+
+        $thead = $this->getThead($equipes);
         
         return view('equipes.index')
-                ->with('equipes', $equipes)
+                ->with('data', $equipes)
+                ->with('thead', $thead)
                 ->with('breadcrumbs', json_encode($this->breadcrumbs));
     }
 
