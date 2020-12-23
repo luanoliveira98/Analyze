@@ -17,8 +17,8 @@
                 <td>{{$item->$tr}}</td>
             @endforeach
             <td>
-                <x-buttons.link route="{{route($route.'.editar', ['id' => $item->id])}}" color="success" icon="fas fa-pencil-alt"/>
-                <x-buttons.link route="{{route($route.'.excluir', ['id' => $item->id])}}" color="danger" icon="fas fa-trash-alt"/>               
+                <x-buttons.link route="{{route($route.'.editar', ['id' => $item->id])}}" color="info" icon="fas fa-pencil-alt" title="Editar"/>
+                <x-buttons.link route="{{route($route.'.excluir', ['id' => $item->id])}}" color="danger" icon="fas fa-trash-alt" title="Excluir"/>               
             </td>
         </tr>
         @endforeach

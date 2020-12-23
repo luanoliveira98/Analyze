@@ -1,3 +1,3 @@
-<div class="card mt-1 mb-2">
+<div class="card p-2">
     {{$slot}}
 </div>

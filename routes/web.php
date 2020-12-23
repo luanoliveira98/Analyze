@@ -14,6 +14,7 @@ Route::prefix('/admin')->name('admin.')->group(function () {
 
     Route::name('equipes.')->prefix('/equipes')->group(function () {
         Route::get('/', 'EquipeController@index')->name('listar');
+        Route::get('/inserir', 'EquipeController@edit')->name('inserir');
         Route::get('/{id}', 'EquipeController@edit')->name('editar');
         Route::delete('/{id}', 'EquipeController@delete')->name('excluir');
     });

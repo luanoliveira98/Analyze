@@ -28,15 +28,23 @@ class Link extends Component
     public $icon;
 
     /**
+     * Título do botão
+     * 
+     * @var string
+     */
+    public $title;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($route, $color, $icon)
+    public function __construct($route, $color, $icon, $title)
     {
         $this->route    = $route;
         $this->color    = $color;
         $this->icon     = $icon;
+        $this->title   = $title;
     }
 
     /**
