@@ -7,7 +7,7 @@
             @if(!empty($breadcrumbs))
                 <x-breadcrumbs.base>
                     <x-breadcrumbs.item route="{{route('admin.home')}}" label="Home"/>
-                    @foreach (json_decode($breadcrumbs) as $item)
+                    @foreach ($breadcrumbs as $item)
                     <x-breadcrumbs.item route="{{route($item->route)}}" label="{{$item->label}}" active="{{$active}}"/>
                     @endforeach
                 </x-breadcrumbs.base>

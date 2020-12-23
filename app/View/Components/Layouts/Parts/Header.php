@@ -46,6 +46,7 @@ class Header extends Component
      */
     public function render()
     {
-        return view('components.layouts.parts.header');
+        return view('components.layouts.parts.header')
+            ->with('breadcrumbs', $this->breadcrumbs);
     }
 }

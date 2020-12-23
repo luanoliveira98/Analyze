@@ -18,7 +18,7 @@ class EquipeController extends Controller
         return view('equipes.index')
                 ->with('data', $equipes)
                 ->with('thead', $thead)
-                ->with('breadcrumbs', json_encode($this->breadcrumbs));
+                ->with('breadcrumbs', $this->breadcrumbs);
     }
 
     public function create()

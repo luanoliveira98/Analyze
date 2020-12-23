@@ -1,4 +1,3 @@
-{{-- {{dd($breadcrumbs)}} --}}
 <x-layouts.admin title="Equipes" active="equipes" :breadcrumbs="$breadcrumbs">
     <x-cards.base>
         <x-cards.header title="Lista de Equipes">
