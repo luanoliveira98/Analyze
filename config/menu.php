@@ -8,21 +8,21 @@ return [
             "subitems" => (object) array(
                 "Administracao" => (object) array(
                     "label" => "Administração",
-                    "route" => "membros.administracao",
+                    "route" => "admin.membros.administracao",
                 ),
                 "Staff" => (object) array(
                     "label" => "Staff",
-                    "route" => "membros.staff",
+                    "route" => "admin.membros.staff",
                 ),
                 "Elenco" => (object) array(
                     "label" => "Elenco",
-                    "route" => "membros.elenco",
+                    "route" => "admin.membros.elenco",
                 ),
             ),
         ),
         "Equipes" => (object) array(
             "label" => "Equipes",
-            "route" => "equipes.lista",
+            "route" => "admin.equipes.listar",
             "icon"  => "fas fa-sitemap"
         ),
     )

@@ -1,5 +1,5 @@
 <x-tables.data-tables-css/>
-<table id="DataTable" class="table table-bordered table-striped">
+<table id="DataTable" class="table table-bordered table-striped text-center">
     <thead>
         <tr>
             @foreach ($thead as $tr)
@@ -12,11 +12,15 @@
     </thead>
     <tbody>
         @foreach($data as $item)
-            <tr>
-                <td>{{$item->id}}</td>
-                <td>{{$item->nome}}</td>
-                <td>{{$item->created_at}}</td>
-            </tr>
+        <tr>
+            @foreach ($thead as $tr)
+                <td>{{$item->$tr}}</td>
+            @endforeach
+            <td>
+                <x-buttons.link route="{{route($route.'.editar', ['id' => $item->id])}}" color="success" icon="fas fa-pencil-alt"/>
+                <x-buttons.link route="{{route($route.'.excluir', ['id' => $item->id])}}" color="danger" icon="fas fa-trash-alt"/>               
+            </td>
+        </tr>
         @endforeach
     </tbody>
     <tfoot>

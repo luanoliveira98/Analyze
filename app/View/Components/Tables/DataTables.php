@@ -21,14 +21,22 @@ class DataTables extends Component
     public $thead;
 
     /**
+     * Rota base para as ações
+     * 
+     * @var object
+     */
+    public $route;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($data, $thead)
+    public function __construct($data, $thead, $route)
     {
         $this->data = $data;
         $this->thead = $thead;
+        $this->route = $route;
     }
 
     /**

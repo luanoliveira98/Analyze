@@ -8,13 +8,12 @@ use Illuminate\Http\Request;
 class EquipeController extends Controller
 {
     public $label = 'Equipes';
-    public $route = 'equipes.lista';
+    public $route = 'admin.equipes.listar';
 
     public function index()
     {
-        $equipes = Equipe::select('id', 'nome')->get();
-
-        $thead = $this->getThead($equipes);
+        $thead = ['id', 'nome'];
+        $equipes = Equipe::select($thead)->get();
         
         return view('equipes.index')
                 ->with('data', $equipes)

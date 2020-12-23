@@ -14,8 +14,10 @@
 $(function () {
     $.noConflict();
     $("#DataTable").DataTable({
-    "responsive": true, "lengthChange": false, "autoWidth": false,
-    "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    "responsive": true, "lengthChange": false, "autoWidth": false, 
+    "language": {
+        "url": "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
+    }
     }).buttons().container().appendTo('#DataTable_wrapper .col-md-6:eq(0)');
 });
 </script>
