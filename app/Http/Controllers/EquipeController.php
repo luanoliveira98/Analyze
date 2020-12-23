@@ -7,12 +7,16 @@ use Illuminate\Http\Request;
 
 class EquipeController extends Controller
 {
+    public $label = 'Equipes';
+    public $route = 'equipes.lista';
+
     public function index()
     {
         $equipes = Equipe::all();
         
         return view('equipes.index')
-                ->with('equipes', $equipes);
+                ->with('equipes', $equipes)
+                ->with('breadcrumbs', json_encode($this->breadcrumbs));
     }
 
     public function create()

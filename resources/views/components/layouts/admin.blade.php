@@ -13,7 +13,7 @@
             <x-navs.sidebar active={{$active}}/>
 
             <div class="content-wrapper">
-                <x-layouts.parts.header title={{$title}} active={{$active}}>
+                <x-layouts.parts.header title={{$title}} active={{$active}} :breadcrumbs="$breadcrumbs">
                     <x-breadcrumbs.base/>
                 </x-layouts.parts.header>
                 

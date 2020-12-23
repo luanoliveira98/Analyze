@@ -21,14 +21,22 @@ class Admin extends Component
     public $active;
     
     /**
+     * Breadcrumbs.
+     *
+     * @var array
+     */
+    public $breadcrumbs;
+    
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($title, $active)
+    public function __construct($title, $active, $breadcrumbs=null)
     {
         $this->title = $title;
         $this->active = $active;
+        $this->breadcrumbs = $breadcrumbs;
     }
 
     /**

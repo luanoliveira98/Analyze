@@ -4,10 +4,12 @@
             <div class="col-sm-6">
                 <h1 class="m-0">{{$title}}</h1>
             </div>
-
-            @if(isset($breadcrumbs))
+            @if(!empty($breadcrumbs))
                 <x-breadcrumbs.base>
-                    <x-breadcrumbs.item route="{{route('home')}}" label="Home" active="{{$active}}"/>
+                    <x-breadcrumbs.item route="{{route('home')}}" label="Home"/>
+                    @foreach (json_decode($breadcrumbs) as $item)
+                    <x-breadcrumbs.item route="{{route($item->route)}}" label="{{$item->label}}" active="{{$active}}"/>
+                    @endforeach
                 </x-breadcrumbs.base>
             @endif
         </div>
