@@ -22,11 +22,11 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     });
 
     Route::name('adversarios.')->prefix('/adversarios')->group(function () {
-        Route::get('/adversarios',  'EquipeController@index')->name('listar');
-        Route::get('/inserir',      'EquipeController@create')->name('inserir');
-        Route::post('/',            'EquipeController@store')->name('salvar');
-        Route::get('/{id}',         'EquipeController@edit')->name('editar');
-        Route::put('/{id}',         'EquipeController@update')->name('atualizar');
-        Route::delete('/{id}',      'EquipeController@destroy')->name('excluir');
+        Route::get('/',         'AdversarioController@index')->name('listar');
+        Route::get('/inserir',  'AdversarioController@create')->name('inserir');
+        Route::post('/',        'AdversarioController@store')->name('salvar');
+        Route::get('/{id}',     'AdversarioController@edit')->name('editar');
+        Route::put('/{id}',     'AdversarioController@update')->name('atualizar');
+        Route::delete('/{id}',  'AdversarioController@destroy')->name('excluir');
     });
 });
