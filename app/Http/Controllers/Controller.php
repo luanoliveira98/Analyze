@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Controller extends BaseController
 {
@@ -57,5 +58,20 @@ class Controller extends BaseController
         }
 
         return $breadcrumbs;
+    }
+
+    /**
+     * Faz validação dos dados da requisição.
+     * 
+     * @param   Object      $request        Dados da Requisição
+     * 
+     * @return  Object                      Retorno da validação com Validator
+     */
+    public function makeValidation($request)
+    {
+        $validator = Validator::make($request->all(), $this->getRules());
+
+        if($validator->fails()) return $validator;
+        else return false;
     }
 }

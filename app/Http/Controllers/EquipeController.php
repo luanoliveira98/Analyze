@@ -32,6 +32,10 @@ class EquipeController extends Controller
     public function store(Request $request)
     {
         $input = $request->input();
+
+        $validator = $this->makeValidation($request);
+
+        if ($validator) return back()->withInput()->withErrors($validator);
         return $input;
     }
 
@@ -53,5 +57,12 @@ class EquipeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getRules()
+    {
+        return [
+            'nome' => 'required'
+        ];
     }
 }
