@@ -1,13 +1,13 @@
-<x-layouts.admin title="Equipes" active="equipes" :breadcrumbs="$breadcrumbs">
+<x-layouts.admin title="{{$config->index->title}}" active="{{$config->active}}" :breadcrumbs="$breadcrumbs">
     <x-cards.base>
-        <x-cards.header title="Lista de Equipes">
+        <x-cards.header title="{{$config->index->title}}">
             <div class="ml-auto">
                 <x-buttons.link 
-                    route="{{route('admin.equipes.inserir')}}" color="success" icon="fas fa-plus" title="Inserir"/>
+                    route="{{route($config->route.'.inserir')}}" color="success" icon="fas fa-plus" title="Inserir"/>
             </div>
         </x-cards.header>
         <x-cards.body>
-            <x-tables.data-tables route="admin.equipes" :data=$data :thead=$thead/>
+            <x-tables.data-tables route="{{$config->route}}" :data=$data :thead=$thead/>
         </x-cards.body>
     </x-cards.base>
 </x-layouts.admin>

@@ -8,25 +8,22 @@ use Illuminate\Support\Facades\Redirect;
 
 class EquipeController extends Controller
 {
-    public $label   = 'Equipes';
-    public $route   = 'admin.equipes.listar';
-    public $inserir = 'admin.equipes.inserir';
-    public $editar  = 'admin.equipes.editar';
 
     public function index()
     {
-        $thead = ['id', 'nome'];
-        $equipes = Equipe::lines()->select($thead)->get();
+        $equipes = Equipe::lines()->select($this->config->index->thead)->get();
         
         return view('admin.equipes.index')
                 ->with('data', $equipes)
-                ->with('thead', $thead)
+                ->with('config', $this->config)
+                ->with('thead', $this->config->index->thead)
                 ->with('breadcrumbs', $this->getBreadcrumbs());
     }
 
     public function create()
     {
         return view('admin.equipes.create')
+            ->with('config', $this->config)
             ->with('breadcrumbs', $this->getBreadcrumbs('inserir'));
     }
 
@@ -62,7 +59,7 @@ class EquipeController extends Controller
         $equipe->nome = $request->nome;
         $equipe->save();
 
-        return Redirect::route($this->editar, ['id' => $id])
+        return Redirect::route($this->edit, ['id' => $id])
                         ->with('success', config('message.update'));
     }
 
@@ -75,10 +72,25 @@ class EquipeController extends Controller
                     ->with('success', config('message.delete'));
     }
 
+    /**
+     * Cria array de regras para validação
+     * 
+     * @return  array           Regras de validação
+     */
     public function getRules()
     {
         return [
             'nome' => 'required'
         ];
+    }
+    
+    /**
+     * Busca config da controller
+     * 
+     * @return  object          Configurações da controller
+     */
+    public function getConfig()
+    {
+        return config('equipe');
     }
 }
