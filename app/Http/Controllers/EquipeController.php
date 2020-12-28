@@ -11,10 +11,10 @@ class EquipeController extends Controller
 
     public function index()
     {
-        $equipes = Equipe::lines()->select($this->config->index->thead)->get();
+        $data = Equipe::lines()->select($this->config->index->thead)->get();
         
         return view('admin.default.index')
-                ->with('data', $equipes)
+                ->with('data', $data)
                 ->with('config', $this->config)
                 ->with('thead', $this->config->index->thead)
                 ->with('breadcrumbs', $this->getBreadcrumbs());
@@ -33,9 +33,9 @@ class EquipeController extends Controller
 
         if ($validator) return back()->withInput()->withErrors($validator);
         
-        $equipe = new Equipe();
-        $equipe->nome = $request->nome;
-        $equipe->save();
+        $data = new Equipe();
+        $data->nome = $request->nome;
+        $data->save();
 
         return Redirect::route($this->route)
             ->with('success', config('message.insert'));
@@ -43,9 +43,9 @@ class EquipeController extends Controller
 
     public function edit($id)
     {
-        $equipe = Equipe::find($id);
+        $data = Equipe::find($id);
         return view('admin.default.edit')
-            ->with('data', $equipe)
+            ->with('data', $data)
             ->with('config', $this->config)
             ->with('breadcrumbs', $this->getBreadcrumbs('editar'));
     }
@@ -56,9 +56,9 @@ class EquipeController extends Controller
 
         if ($validator) return back()->withInput()->withErrors($validator);
         
-        $equipe = Equipe::find($id);
-        $equipe->nome = $request->nome;
-        $equipe->save();
+        $data = Equipe::find($id);
+        $data->nome = $request->nome;
+        $data->save();
 
         return Redirect::route($this->edit, ['id' => $id])
                         ->with('success', config('message.update'));
@@ -66,8 +66,8 @@ class EquipeController extends Controller
 
     public function destroy($id)
     {
-        $equipe = Equipe::find($id);
-        $equipe->delete();
+        $data = Equipe::find($id);
+        $data->delete();
 
         return Redirect::route($this->route)
                     ->with('success', config('message.delete'));
