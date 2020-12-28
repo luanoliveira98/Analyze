@@ -28,7 +28,7 @@ class Base extends Component
     public function __construct($action, $method = 'GET')
     {
         $this->action = $action;
-        $this->method = $method;
+        $this->method = strtoupper($method);
     }
 
     /**

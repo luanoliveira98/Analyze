@@ -43,19 +43,26 @@ class EquipeController extends Controller
         return Redirect::route($this->route);
     }
 
-    public function show($id)
-    {
-        //
-    }
-
     public function edit($id)
     {
-        //
+        $equipe = Equipe::find($id);
+        return view('admin.equipes.edit')
+            ->with('equipe', $equipe)
+            ->with('breadcrumbs', $this->getBreadcrumbs('editar'));
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $validator = $this->makeValidation($request);
+
+        if ($validator) return back()->withInput()->withErrors($validator);
+        
+        $equipe = Equipe::find($id);
+        $equipe->nome = $request->nome;
+        $equipe->save();
+
+        return Redirect::route($this->editar, ['id' => $id])
+                        ->with('success', 'Equipe atualizada com sucesso!');
     }
 
     public function destroy($id)

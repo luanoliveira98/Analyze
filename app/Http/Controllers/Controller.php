@@ -40,14 +40,14 @@ class Controller extends BaseController
             case 'inserir':
                 $breadcrumbs->Inserir = (object) array(
                     "label" => 'Inserir',
-                    "route" => $this->inserir,
+                    "route" => $this->route,
                     "active" => true
                 );
                 break;
             case 'editar':
                 $breadcrumbs->Editar = (object) array(
                     "label" => 'Editar',
-                    "route" => $this->editar,
+                    "route" => $this->route,
                     "active" => true
                 );
                 break;
