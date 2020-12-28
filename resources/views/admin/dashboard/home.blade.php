@@ -8,5 +8,7 @@
             count="{{$quantidades->elenco}}" label="Elenco" icon="fas fa-user-friends" route="{{route('admin.membros.elenco')}}"/>
         <x-dashboard.widget 
             count="{{$quantidades->equipes}}" label="Equipes" icon="fas fa-sitemap" route="{{route('admin.equipes.listar')}}"/>
+        <x-dashboard.widget 
+            count="{{$quantidades->adversarios}}" label="Adversários" icon="fas fa-sitemap" route="{{route('admin.adversarios.listar')}}"/>
     </div>
 </x-layouts.admin>
