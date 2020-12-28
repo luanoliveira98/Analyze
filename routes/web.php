@@ -18,6 +18,6 @@ Route::prefix('/admin')->name('admin.')->group(function () {
         Route::post('/',        'EquipeController@store')->name('salvar');
         Route::get('/{id}',     'EquipeController@edit')->name('editar');
         Route::put('/{id}',     'EquipeController@update')->name('atualizar');
-        Route::delete('/{id}',  'EquipeController@delete')->name('excluir');
+        Route::delete('/{id}',  'EquipeController@destroy')->name('excluir');
     });
 });
