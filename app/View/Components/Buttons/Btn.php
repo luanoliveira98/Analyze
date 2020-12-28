@@ -26,17 +26,41 @@ class Btn extends Component
      * @var string
      */
     public $label;
+    
+    /**
+     * Ícone do botão
+     * 
+     * @var string
+     */
+    public $icon;
+    
+    /**
+     * Title do botão
+     * 
+     * @var string
+     */
+    public $title;
+    
+    /**
+     * Tamanho do botão
+     * 
+     * @var string
+     */
+    public $size;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($type = 'submit', $color, $label = 'Salvar')
+    public function __construct($type = 'submit', $color, $label = 'Salvar', $title = null, $icon = null, $size = null)
     {
         $this->type     = $type;
         $this->color    = $color;
         $this->label    = $label;
+        $this->icon     = $icon;
+        $this->title    = $title;
+        $this->size     = $size;
     }
 
     /**
