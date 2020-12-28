@@ -14,7 +14,7 @@ class HomeController extends Controller
             "administracao" => Usuario::count(),
             "staff"         => Usuario::count(),
             "elenco"        => Usuario::count(),
-            "equipes"       => Equipe::count(),
+            "equipes"       => Equipe::lines()->count(),
         );
         
         return view('admin.dashboard.home')

@@ -9,4 +9,9 @@ class Equipe extends Model
 {
     use softDeletes;
     protected $table = 'equipes';
+
+    public function scopeLines($query)
+    {
+        return $query->where('b_adversario', 0);
+    }
 }

@@ -16,7 +16,7 @@ class EquipeController extends Controller
     public function index()
     {
         $thead = ['id', 'nome'];
-        $equipes = Equipe::select($thead)->get();
+        $equipes = Equipe::lines()->select($thead)->get();
         
         return view('admin.equipes.index')
                 ->with('data', $equipes)
