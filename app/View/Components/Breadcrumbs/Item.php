@@ -36,7 +36,7 @@ class Item extends Component
     {
         $this->route = $route;
         $this->label = $label;
-        $this->active = (strtoupper($label)==strtoupper($active)) ? true : false;
+        $this->active = $active;
     }
 
     /**
