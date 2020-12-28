@@ -40,7 +40,8 @@ class EquipeController extends Controller
         $equipe->nome = $request->nome;
         $equipe->save();
 
-        return Redirect::route($this->route);
+        return Redirect::route($this->route)
+            ->with('success', config('message.insert'));
     }
 
     public function edit($id)
@@ -62,12 +63,16 @@ class EquipeController extends Controller
         $equipe->save();
 
         return Redirect::route($this->editar, ['id' => $id])
-                        ->with('success', 'Equipe atualizada com sucesso!');
+                        ->with('success', config('message.update'));
     }
 
     public function destroy($id)
     {
-        //
+        $equipe = Equipe::find($id);
+        $equipe->delete();
+
+        return Redirect::route($this->route)
+                    ->with('success', config('message.delete'));
     }
 
     public function getRules()

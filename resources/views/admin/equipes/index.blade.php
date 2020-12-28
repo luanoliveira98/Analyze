@@ -12,3 +12,5 @@
     </x-cards.base>
 </x-layouts.admin>
 <x-tables.data-tables-js/>
+
+<x-toasts.success/>
