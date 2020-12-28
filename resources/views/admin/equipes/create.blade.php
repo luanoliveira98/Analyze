@@ -4,7 +4,7 @@
         </x-cards.header>
         <x-cards.body>
             <x-forms.base action="{{route($config->route.'.salvar')}}" method="post">
-                @foreach($config->create->fields as $field)
+                @foreach($config->fields as $field)
                     <x-forms.input 
                         type="{{$field->type}}" name="{{$field->name}}" label="{{$field->label}}" placeholder="{{$field->placeholder}}"/>
                 @endforeach

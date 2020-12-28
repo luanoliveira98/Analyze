@@ -45,7 +45,8 @@ class EquipeController extends Controller
     {
         $equipe = Equipe::find($id);
         return view('admin.equipes.edit')
-            ->with('equipe', $equipe)
+            ->with('data', $equipe)
+            ->with('config', $this->config)
             ->with('breadcrumbs', $this->getBreadcrumbs('editar'));
     }
 

@@ -9,13 +9,16 @@ return (object) [
     ],
     "create" => (object)[
         "title" => "Inserir Equipe",
-        "fields" => (object)[
-            "nome" => (object)[
-                "type" => "text",
-                "name" => "nome",
-                "label" => "Nome",
-                "placeholder" => "Nome da Equipe",
-            ],
+    ],
+    "edit" => (object)[
+        "title" => "Editar Equipe",
+    ],
+    "fields" => (object)[
+        "nome" => (object)[
+            "type" => "text",
+            "name" => "nome",
+            "label" => "Nome",
+            "placeholder" => "Nome da Equipe",
         ],
     ],
 ];
