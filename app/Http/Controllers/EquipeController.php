@@ -13,7 +13,7 @@ class EquipeController extends Controller
     {
         $equipes = Equipe::lines()->select($this->config->index->thead)->get();
         
-        return view('admin.equipes.index')
+        return view('admin.default.index')
                 ->with('data', $equipes)
                 ->with('config', $this->config)
                 ->with('thead', $this->config->index->thead)
@@ -22,7 +22,7 @@ class EquipeController extends Controller
 
     public function create()
     {
-        return view('admin.equipes.create')
+        return view('admin.default.create')
             ->with('config', $this->config)
             ->with('breadcrumbs', $this->getBreadcrumbs('inserir'));
     }
@@ -44,7 +44,7 @@ class EquipeController extends Controller
     public function edit($id)
     {
         $equipe = Equipe::find($id);
-        return view('admin.equipes.edit')
+        return view('admin.default.edit')
             ->with('data', $equipe)
             ->with('config', $this->config)
             ->with('breadcrumbs', $this->getBreadcrumbs('editar'));
