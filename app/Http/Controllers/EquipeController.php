@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 
 class EquipeController extends Controller
 {
-    public $label = 'Equipes';
-    public $route = 'admin.equipes.listar';
+    public $label   = 'Equipes';
+    public $route   = 'admin.equipes.listar';
+    public $inserir = 'admin.equipes.inserir';
+    public $editar  = 'admin.equipes.editar';
 
     public function index()
     {
@@ -18,17 +20,19 @@ class EquipeController extends Controller
         return view('equipes.index')
                 ->with('data', $equipes)
                 ->with('thead', $thead)
-                ->with('breadcrumbs', $this->breadcrumbs);
+                ->with('breadcrumbs', $this->getBreadcrumbs());
     }
 
     public function create()
     {
-        //
+        return view('equipes.create')
+            ->with('breadcrumbs', $this->getBreadcrumbs('inserir'));
     }
 
     public function store(Request $request)
     {
-        //
+        $input = $request->input();
+        return $input;
     }
 
     public function show($id)
