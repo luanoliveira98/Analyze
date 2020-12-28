@@ -12,9 +12,24 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    public $config;
+    public $rules;
+    public $route;
+    public $label;
+    public $edit;
+
+    
     public function __construct()
     {
-
+        if(method_exists($this, 'getConfig')) {
+            $this->config = $this->getConfig();
+            $this->label = $this->config->label;
+            $this->route = $this->config->route.'.listar';
+            $this->edit = $this->config->route.'.editar';
+        }
+        if(method_exists($this, 'getRules')) {
+            $this->rules = $this->getRules();
+        }
     }
 
     /**
@@ -30,7 +45,7 @@ class Controller extends BaseController
 
         $breadcrumbs = (object) array(
             $this->label => (object) array(
-                "label" => $this->label,
+                "label" => $this->config->label,
                 "route" => $this->route,
                 "active" => false
             ),
@@ -69,7 +84,7 @@ class Controller extends BaseController
      */
     public function makeValidation($request)
     {
-        $validator = Validator::make($request->all(), $this->getRules());
+        $validator = Validator::make($request->all(), $this->rules);
 
         if($validator->fails()) return $validator;
         else return false;
