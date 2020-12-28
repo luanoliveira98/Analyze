@@ -27,6 +27,7 @@ class EquipeController extends Controller
     public function saveData($data, $request)
     {
         $data->nome = $request->nome;
+        $data->nivel = $request->nivel;
         return $data;
     }
 
