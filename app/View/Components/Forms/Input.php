@@ -33,17 +33,26 @@ class Input extends Component
      * @var string
      */
     public $value;
+
+    /**
+     * Tipo do input
+     * 
+     * @var string
+     */
+    public $type;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name, $label, $placeholder, $value = null)
+    public function __construct($name, $label, $placeholder, $value = null, $type = 'text')
     {
         $this->name         = $name;
         $this->label        = $label;
         $this->placeholder  = $placeholder;
         $this->value        = $value;
+        $this->type         = $type;
     }
 
     /**
