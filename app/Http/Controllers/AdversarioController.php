@@ -27,6 +27,7 @@ class AdversarioController extends Controller
     public function saveData($data, $request)
     {
         $data->nome = $request->nome;
+        $data->nivel = $request->nivel;
         $data->b_adversario = 1;
         return $data;
     }
