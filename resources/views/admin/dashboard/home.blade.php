@@ -1,14 +1,17 @@
 <x-layouts.admin title="Home" active="home">
     <div class="row">
-        <x-dashboard.widget 
-            count="{{$quantidades->administracao}}" label="Administração" icon="fas fa-user-tie" route="{{route('admin.membros.administracao')}}"/>
-        <x-dashboard.widget 
-            count="{{$quantidades->staff}}" label="Staff" icon="fas fa-user-graduate" route="{{route('admin.membros.staff')}}"/>
-        <x-dashboard.widget 
-            count="{{$quantidades->elenco}}" label="Elenco" icon="fas fa-user-friends" route="{{route('admin.membros.elenco')}}"/>
-        <x-dashboard.widget 
-            count="{{$quantidades->equipes}}" label="Equipes" icon="fas fa-sitemap" route="{{route('admin.equipes.listar')}}"/>
-        <x-dashboard.widget 
-            count="{{$quantidades->adversarios}}" label="Adversários" icon="fas fa-sitemap" route="{{route('admin.adversarios.listar')}}"/>
+        {{-- {{dd(config('menu.items'))}} --}}
+        @foreach (config('menu.items') as $key => $item)
+            @if(!$item->dashboard)
+            @elseif(!isset($item->subitems))
+            <x-dashboard.widget 
+                count="{{$quantidades->$key}}" label="{{$item->label}}" icon="{{$item->icon}}" route="{{route($item->route)}}"/>
+            @else
+                @foreach ($item->subitems as $subkey => $subitem)
+                <x-dashboard.widget 
+                    count="{{$quantidades->$subkey}}" label="{{$subitem->label}}" icon="{{$subitem->icon}}" route="{{route($subitem->route)}}"/>
+                @endforeach
+            @endif
+        @endforeach
     </div>
 </x-layouts.admin>
