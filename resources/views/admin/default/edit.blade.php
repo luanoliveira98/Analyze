@@ -4,12 +4,19 @@
         </x-cards.header>
         <x-cards.body>
             <x-forms.base action="{{route($config->route.'.atualizar', ['id' => $data->id])}}" method="put">
-                @foreach($config->fields as $key => $field)
-                    <x-forms.input 
-                        type="{{$field->type}}" name="{{$field->name}}" label="{{$field->label}}" placeholder="{{$field->placeholder}}" value="{{$data->$key}}"/>
-                @endforeach
-                <div class="text-right">
-                    <x-buttons.btn color="primary"/>
+                <div class="row">
+                    @foreach($config->fields as $key => $field)
+                        @if($field->type == 'select')
+                        <x-forms.select
+                            name="{{$field->name}}" label="{{$field->label}}" placeholder="{{$field->placeholder}}" :options=$field value="{{$data->$key}}"/>
+                        @else
+                        <x-forms.input 
+                            type="{{$field->type}}" name="{{$field->name}}" label="{{$field->label}}" placeholder="{{$field->placeholder}}" value="{{$data->$key}}"/>
+                        @endif
+                    @endforeach
+                    <div class="ml-auto">
+                        <x-buttons.btn color="primary"/>
+                    </div>
                 </div>
             </x-forms.base>
         </x-cards.body>
