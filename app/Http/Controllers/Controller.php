@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -26,6 +28,7 @@ class Controller extends BaseController
             $this->label = $this->config->label;
             $this->route = $this->config->route.'.listar';
             $this->edit = $this->config->route.'.editar';
+            $this->model = config('app.model').'\\'.$this->config->model;
         }
         if(method_exists($this, 'getRules')) {
             $this->rules = $this->getRules();
@@ -88,5 +91,70 @@ class Controller extends BaseController
 
         if($validator->fails()) return $validator;
         else return false;
+    }
+
+    public function index()
+    {
+        return view('admin.default.index')
+                ->with('data', $this->data())
+                ->with('config', $this->config)
+                ->with('thead', $this->config->index->thead)
+                ->with('breadcrumbs', $this->getBreadcrumbs());
+    }
+
+    public function create()
+    {
+        return view('admin.default.create')
+            ->with('config', $this->config)
+            ->with('breadcrumbs', $this->getBreadcrumbs('inserir'));
+    }
+
+    public function store(Request $request)
+    {
+        $validator = $this->makeValidation($request);
+
+        if ($validator) return back()->withInput()->withErrors($validator);
+        
+        $model =  $this->model;
+        $data = $this->saveData(new $model(), $request);
+        $data->save();
+
+        return Redirect::route($this->route)
+            ->with('success', config('message.insert'));
+    }
+
+    public function edit($id)
+    {
+        $model =  $this->model;
+        $data = $model::find($id);
+        return view('admin.default.edit')
+            ->with('data', $data)
+            ->with('config', $this->config)
+            ->with('breadcrumbs', $this->getBreadcrumbs('editar'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validator = $this->makeValidation($request);
+
+        if ($validator) return back()->withInput()->withErrors($validator);
+        
+        $model = $this->model;
+        $data = $model::find($id);
+        $data = $this->saveData($data, $request);
+        $data->save();
+
+        return Redirect::route($this->edit, ['id' => $id])
+                        ->with('success', config('message.update'));
+    }
+
+    public function destroy($id)
+    {
+        $model = $this->model;
+        $data = $model::find($id);
+        $data->delete();
+
+        return Redirect::route($this->route)
+                    ->with('success', config('message.delete'));
     }
 }

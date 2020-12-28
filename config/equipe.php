@@ -2,10 +2,12 @@
 return (object) [
     "label" => "Equipes",
     "active" => "equipes",
+    "model" => "Equipe",
     "route" => "admin.equipes",
     "index" => (object)[
         "title" => "Lista de Equipes",
-        "thead" => ['id', 'nome']
+        "thead" => ['nome'],
+        "select" => ['id','nome']
     ],
     "create" => (object)[
         "title" => "Inserir Equipe",
