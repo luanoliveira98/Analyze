@@ -6,7 +6,7 @@
             <x-forms.base action="{{route('admin.equipes.salvar')}}" method="post">
                 <x-forms.input name="nome" label="Nome" placeholder="Nome da Equipe"/>
                 <div class="text-right">
-                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <x-buttons.btn color="primary"/>
                 </div>
             </x-forms.base>
         </x-cards.body>
