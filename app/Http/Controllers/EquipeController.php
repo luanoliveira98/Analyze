@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Equipe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class EquipeController extends Controller
 {
@@ -17,7 +18,7 @@ class EquipeController extends Controller
         $thead = ['id', 'nome'];
         $equipes = Equipe::select($thead)->get();
         
-        return view('equipes.index')
+        return view('admin.equipes.index')
                 ->with('data', $equipes)
                 ->with('thead', $thead)
                 ->with('breadcrumbs', $this->getBreadcrumbs());
@@ -25,18 +26,21 @@ class EquipeController extends Controller
 
     public function create()
     {
-        return view('equipes.create')
+        return view('admin.equipes.create')
             ->with('breadcrumbs', $this->getBreadcrumbs('inserir'));
     }
 
     public function store(Request $request)
     {
-        $input = $request->input();
-
         $validator = $this->makeValidation($request);
 
         if ($validator) return back()->withInput()->withErrors($validator);
-        return $input;
+        
+        $equipe = new Equipe();
+        $equipe->nome = $request->nome;
+        $equipe->save();
+
+        return Redirect::route($this->route);
     }
 
     public function show($id)

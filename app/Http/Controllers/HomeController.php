@@ -17,7 +17,7 @@ class HomeController extends Controller
             "equipes"       => Equipe::count(),
         );
         
-        return view('dashboard.home')
+        return view('admin.dashboard.home')
                 ->with('quantidades', $quantidades);
     }
 }
