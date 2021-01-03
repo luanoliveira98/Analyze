@@ -18,10 +18,10 @@ return (object) [
     ],
     "create" => (object)[
         "title" => "Inserir Adversário",
-        "save" => function(array $request): bool
+        "save" => function(array $request): object
         {
             $request['b_adversario'] = 1;
-            return Equipe::insert($request);
+            return Equipe::create($request);
         }
     ],
     "edit" => (object)[

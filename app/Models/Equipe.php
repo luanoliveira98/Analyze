@@ -9,6 +9,7 @@ class Equipe extends Model
 {
     use softDeletes;
     protected $table = 'equipes';
+    protected $fillable = ['nome', 'nivel', 'b_adversario'];
 
     /**
      * Lista as line ups da organização
