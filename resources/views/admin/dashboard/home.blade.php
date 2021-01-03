@@ -1,6 +1,5 @@
 <x-layouts.admin title="Home" active="home">
     <div class="row">
-        {{-- {{dd(config('menu.items'))}} --}}
         @foreach (config('menu.items') as $key => $item)
             @if(!$item->dashboard)
             @elseif(!isset($item->subitems))
