@@ -1,6 +1,5 @@
 <?php
 
-use Carbon\Carbon;
 use App\Models\Usuario;
 use App\Models\UsuarioTag;
 use Illuminate\Support\Facades\Hash;
