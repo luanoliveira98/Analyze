@@ -158,10 +158,10 @@ class Controller extends BaseController
         if ($validator) return back()->withInput()->withErrors($validator);
         
         // Atualiza registro
-        if(isset($this->config->edit->update)) {
+        if(isset($this->config->edit->save)) {
             // Atualiza na config?
-            $update = $this->config->edit->update;
-            $data = $update($request->except('_token', '_method'), $id);
+            $save = $this->config->edit->save;
+            $data = $save($request->except('_token', '_method'), $id);
         } else {
             // Atualiza padrão?
             $model = $this->model;
@@ -187,9 +187,9 @@ class Controller extends BaseController
         $this->getConfig($config);
 
         // Deleta registro
-        if(isset($this->config->delete)) {
+        if(isset($this->config->delete->save)) {
             // Deleta na config?
-            $delete = $this->config->delete;
+            $delete = $this->config->delete->save;
             $data = $delete($id);
         } else {
             // Deleta padrão?
