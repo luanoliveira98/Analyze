@@ -10,7 +10,7 @@ class HomeController extends Controller
     public function index(string $config = '')
     {
         $quantidades = (object) array(
-            "administracao" => Usuario::administracao()->count(),
+            "diretoria"     => Usuario::diretoria()->count(),
             "staff"         => Usuario::count(),
             "elenco"        => Usuario::count(),
             "equipes"       => Equipe::lines()->count(),

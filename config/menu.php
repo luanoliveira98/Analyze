@@ -7,10 +7,10 @@ return [
             "icon"  => "fas fa-users",
             "dashboard"  => true,
             "subitems" => (object) array(
-                "administracao" => (object) array(
-                    "label" => "Administração",
+                "diretoria" => (object) array(
+                    "label" => "Diretoria",
                     "icon"  => "fas fa-user-tie",
-                    "route" => "administracao",
+                    "route" => "diretoria",
                     "dashboard"  => true,
                 ),
                 "staff" => (object) array(
