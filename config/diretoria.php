@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 
 return (object) [
     "label" => "Diretoria",
-    "active" => "membros",
+    "active" => "usuários",
     "model" => "Usuario",
     "route" => "diretoria",
     "index" => (object)[

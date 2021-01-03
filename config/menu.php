@@ -2,8 +2,8 @@
 
 return [
     "items" => (object) array(
-        "Membros" => (object) array(
-            "label" => "Membros",
+        "Usuários" => (object) array(
+            "label" => "Usuários",
             "icon"  => "fas fa-users",
             "dashboard"  => true,
             "subitems" => (object) array(
