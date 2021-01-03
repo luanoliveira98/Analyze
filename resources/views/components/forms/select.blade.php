@@ -4,7 +4,7 @@
 <div class="form-group {{$class}}">
     <label>{{$label}}</label>
     <select class="form-control select2" data-placeholder="{{$placeholder}}" style="width: 100%;" name="{{$name}}" id="{{$name}}">
-        @foreach($options->options as $key => $item)
+        @foreach($options as $key => $item)
             <option value="{{$key}}" @if($key == old($name) || $key == $value) selected @endif>{{$item}}</option>
         @endforeach
     </select>

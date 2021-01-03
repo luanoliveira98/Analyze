@@ -58,7 +58,8 @@ class Select extends Component
          $this->name         = $name;
          $this->label        = $label;
          $this->placeholder  = $placeholder;
-         $this->options      = $options;
+         $options = $options->options;
+         $this->options      = $options();
          $this->value        = $value;
          $this->class        = $class;
      }

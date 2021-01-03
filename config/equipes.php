@@ -35,11 +35,14 @@ return (object) [
             "name" => "nivel",
             "label" => "Nível",
             "placeholder" => "Nível na Empoliga",
-            "options" => (object)[
-                "Major" => "Major",
-                "Minor" => "Minor",
-                "Tradicional" => "Tradicional",
-            ],
+            "options" => function (): object
+            {
+                return (object)[
+                    "Major" => "Major",
+                    "Minor" => "Minor",
+                    "Tradicional" => "Tradicional",
+                ];
+            },
             "class" => "col-md-6",
         ],
     ],
