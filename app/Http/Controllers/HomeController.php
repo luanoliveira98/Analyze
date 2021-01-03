@@ -11,8 +11,8 @@ class HomeController extends Controller
     {
         $quantidades = (object) array(
             "diretoria"     => Usuario::diretoria()->count(),
-            "staff"         => Usuario::count(),
-            "elenco"        => Usuario::count(),
+            "staff"         => Usuario::staff()->count(),
+            "elenco"        => Usuario::elenco()->count(),
             "equipes"       => Equipe::lines()->count(),
             "adversarios"   => Equipe::adversarios()->count(),
         );

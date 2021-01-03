@@ -11,18 +11,6 @@ class Usuario extends Model
     protected $table = 'usuarios';
     protected $fillable = ['nome', 'email', 'nick', 'senha'];
 
-    public function scopeDiretoria($query)
-    {
-        return $query->whereHas('tags', function($q){
-            $q->where('nivel', 'Diretoria');
-        });
-    }
-
-    public function tags()
-    {
-        return $this->hasMany(UsuarioTag::class);
-    }
-
     /**
      * Cria array de regras para validação
      * 
@@ -46,5 +34,31 @@ class Usuario extends Model
         }
 
         return $data;
+    }
+
+    public function tags()
+    {
+        return $this->hasMany(UsuarioTag::class);
+    }
+
+    public function scopeDiretoria($query)
+    {
+        return $query->whereHas('tags', function($q){
+            $q->where('nivel', 'Diretoria');
+        });
+    }
+
+    public function scopeStaff($query)
+    {
+        return $query->whereHas('tags', function($q){
+            $q->where('nivel', 'Staff');
+        });
+    }
+
+    public function scopeElenco($query)
+    {
+        return $query->whereHas('tags', function($q){
+            $q->where('nivel', 'Elenco');
+        });
     }
 }
