@@ -89,7 +89,7 @@ class Controller extends BaseController
         $this->getConfig($config);
 
         // Valida requisição
-        $validator = $this->makeValidation($request);
+        $validator = $this->makeValidation($request, 'store');
         if ($validator) return back()->withInput()->withErrors($validator);
         
         // Salva registro
@@ -100,7 +100,7 @@ class Controller extends BaseController
         } else {
             // Salva padrão?
             $model = $this->model;
-            $data = $model::insert($request->except('_token'));
+            $data = $model::create($request->except('_token'));
         }
 
         // Redireciona para index
@@ -154,7 +154,7 @@ class Controller extends BaseController
         $this->getConfig($config);
 
         // Valida requisição
-        $validator = $this->makeValidation($request);
+        $validator = $this->makeValidation($request, 'update');
         if ($validator) return back()->withInput()->withErrors($validator);
         
         // Atualiza registro
@@ -249,12 +249,13 @@ class Controller extends BaseController
      * Faz validação dos dados da requisição.
      * 
      * @param   object      $request        Dados da Requisição
+     * @param   string      $action         Ação da rota
      * 
      * @return  mixed                       Retorno da validação com Validator
      */
-    public function makeValidation(object $request)
+    public function makeValidation(object $request, string $action)
     {
-        $validator = Validator::make($request->all(), $this->getRules());
+        $validator = Validator::make($request->all(), $this->getRules($action, $request));
 
         if($validator->fails()) return $validator;
         else return false;
@@ -277,11 +278,14 @@ class Controller extends BaseController
     /**
      * Busca regras de validação da model
      * 
+     * @param   string      $action     Ação da rota
+     * @param   object     $request     Dados da requisição
+     * 
      * @return  array
      */
-    public function getRules(): array
+    public function getRules(string $action, object $request): array
     {
         $model = $this->model;
-        return $model::getRules();
+        return $model::getRules($action, $request);
     }
 }
