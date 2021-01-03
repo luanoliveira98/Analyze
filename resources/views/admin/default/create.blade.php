@@ -3,15 +3,15 @@
         <x-cards.header title="{{$config->create->title}}">
         </x-cards.header>
         <x-cards.body>
-            <x-forms.base action="{{route($config->route.'.salvar')}}" method="post">
+            <x-forms.base action="{{route('admin.salvar', ['config' => $config->route])}}" method="post">
                 <div class="row">
                     @foreach($config->fields as $field)
                         @if($field->type == 'select')
                         <x-forms.select
-                            name="{{$field->name}}" label="{{$field->label}}" placeholder="{{$field->placeholder}}" :options=$field/>
+                            name="{{$field->name}}" label="{{$field->label}}" placeholder="{{$field->placeholder}}" :options=$field class="{{$field->class}}"/>
                         @else
                         <x-forms.input 
-                            type="{{$field->type}}" name="{{$field->name}}" label="{{$field->label}}" placeholder="{{$field->placeholder}}"/>
+                            type="{{$field->type}}" name="{{$field->name}}" label="{{$field->label}}" placeholder="{{$field->placeholder}}" class="{{$field->class}}"/>
                         @endif
                     @endforeach
                     <div class="ml-auto">

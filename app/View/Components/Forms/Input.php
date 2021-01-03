@@ -42,17 +42,25 @@ class Input extends Component
     public $value;
 
     /**
+     * Classe do input
+     * 
+     * @var string
+     */
+    public $class;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name, $label, $placeholder, $type = 'text', $value = null)
+    public function __construct($name, $label, $placeholder, $type = 'text', $value = null, $class = 'col-md-12')
     {
         $this->name         = $name;
         $this->label        = $label;
         $this->placeholder  = $placeholder;
         $this->type         = $type;
         $this->value        = $value;
+        $this->class        = $class;
     }
 
     /**

@@ -7,10 +7,10 @@ use App\Models\Usuario;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(string $config = '')
     {
         $quantidades = (object) array(
-            "administracao" => Usuario::count(),
+            "administracao" => Usuario::administracao()->count(),
             "staff"         => Usuario::count(),
             "elenco"        => Usuario::count(),
             "equipes"       => Equipe::lines()->count(),

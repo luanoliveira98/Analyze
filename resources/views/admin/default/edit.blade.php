@@ -3,15 +3,15 @@
         <x-cards.header title="{{$config->edit->title}}">
         </x-cards.header>
         <x-cards.body>
-            <x-forms.base action="{{route($config->route.'.atualizar', ['id' => $data->id])}}" method="put">
+            <x-forms.base action="{{route('admin.atualizar', ['id' => $data->id, 'config' => $config->route])}}" method="put">
                 <div class="row">
                     @foreach($config->fields as $key => $field)
                         @if($field->type == 'select')
                         <x-forms.select
-                            name="{{$field->name}}" label="{{$field->label}}" placeholder="{{$field->placeholder}}" :options=$field value="{{$data->$key}}"/>
+                            name="{{$field->name}}" label="{{$field->label}}" placeholder="{{$field->placeholder}}" :options=$field value="{{$data->$key}}" class="{{$field->class}}"/>
                         @else
                         <x-forms.input 
-                            type="{{$field->type}}" name="{{$field->name}}" label="{{$field->label}}" placeholder="{{$field->placeholder}}" value="{{$data->$key}}"/>
+                            type="{{$field->type}}" name="{{$field->name}}" label="{{$field->label}}" placeholder="{{$field->placeholder}}" value="{{$data->$key}}" class="{{$field->class}}"/>
                         @endif
                     @endforeach
                     <div class="ml-auto">

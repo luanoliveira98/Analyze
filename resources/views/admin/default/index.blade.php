@@ -3,7 +3,7 @@
         <x-cards.header title="{{$config->index->title}}">
             <div class="ml-auto">
                 <x-buttons.link 
-                    route="{{route($config->route.'.inserir')}}" color="success" icon="fas fa-plus" title="Inserir"/>
+                    route="{{route('admin.inserir', ['config' => $config->route])}}" color="success" icon="fas fa-plus" title="Inserir"/>
             </div>
         </x-cards.header>
         <x-cards.body>

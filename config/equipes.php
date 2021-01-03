@@ -3,7 +3,8 @@ return (object) [
     "label" => "Equipes",
     "active" => "equipes",
     "model" => "Equipe",
-    "route" => "admin.equipes",
+    "controller" => "EquipeController",
+    "route" => "equipes",
     "index" => (object)[
         "title" => "Lista de Equipes",
         "thead" => ['nome', 'nivel'],
@@ -21,6 +22,7 @@ return (object) [
             "name" => "nome",
             "label" => "Nome",
             "placeholder" => "Nome da Equipe",
+            "class" => "col-md-6",
         ],
         "nivel" => (object)[
             "type" => "select",
@@ -32,6 +34,7 @@ return (object) [
                 "Minor" => "Minor",
                 "Tradicional" => "Tradicional",
             ],
+            "class" => "col-md-6",
         ],
     ],
 ];

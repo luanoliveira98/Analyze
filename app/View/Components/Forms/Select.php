@@ -42,17 +42,25 @@ class Select extends Component
      public $value;
  
      /**
+      * Classe do select
+      * 
+      * @var string
+      */
+     public $class;
+ 
+     /**
       * Create a new component instance.
       *
       * @return void
       */
-     public function __construct($name, $label, $placeholder, $value = null, $options)
+     public function __construct($name, $label, $placeholder, $value = null, $options, $class = 'col-md-12')
      {
          $this->name         = $name;
          $this->label        = $label;
          $this->placeholder  = $placeholder;
          $this->options      = $options;
          $this->value        = $value;
+         $this->class        = $class;
      }
 
     /**

@@ -10,14 +10,14 @@
                 @foreach(config('menu.items') as $item)
                     <x-navs.parts.nav-item 
                         label="{{$item->label}}" 
-                        route="{{(isset($item->route)) ? route($item->route) : ''}}"
+                        route="{{(isset($item->route)) ? route('admin.listar', ['config' => $item->route]) : ''}}"
                         icon="{{$item->icon}}" 
                         active="{{$active}}">
                         @if(!isset($item->route))
                             @foreach($item->subitems as $subitem)
                                 <x-navs.parts.nav-item 
                                     label="{{$subitem->label}}" 
-                                    route="{{route($subitem->route)}}"
+                                    route="{{route('admin.listar', ['config' => $subitem->route])}}"
                                     icon="far fa-circle" 
                                     active="{{$active}}"/>
                             @endforeach

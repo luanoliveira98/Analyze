@@ -5,6 +5,7 @@ return [
     'name' => env('APP_NAME', 'Laravel'),
 
     'model' => "\App\Models",
+    'controller' => "\App\Http\Controllers",
 
     'env' => env('APP_ENV', 'production'),
 

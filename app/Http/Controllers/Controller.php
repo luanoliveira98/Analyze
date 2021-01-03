@@ -23,16 +23,161 @@ class Controller extends BaseController
     
     public function __construct()
     {
-        if(method_exists($this, 'getConfig')) {
-            $this->config = $this->getConfig();
-            $this->label = $this->config->label;
-            $this->route = $this->config->route.'.listar';
-            $this->edit = $this->config->route.'.editar';
-            $this->model = config('app.model').'\\'.$this->config->model;
-        }
-        if(method_exists($this, 'getRules')) {
-            $this->rules = $this->getRules();
-        }
+
+    }
+
+    /**
+     * Index padrão
+     * 
+     * @param   string      $config    Config da rota
+     * 
+     * @return  View
+     */
+    public function index(string $config)
+    {
+        // Inicia config
+        $this->getConfig($config);
+
+        // Faz busca para listar
+        $controller = $this->controller;
+        $newObj = new $controller();
+        $data = $newObj->data($this->config->index->select);
+
+        //Cria view
+        return view('admin.default.index')
+                ->with('data', $data)
+                ->with('config', $this->config)
+                ->with('thead', $this->config->index->thead)
+                ->with('breadcrumbs', $this->getBreadcrumbs());
+    }
+    
+    /**
+     * Create padrão
+     * 
+     * @param   string      $config    Config da rota
+     * 
+     * @return  View
+     */
+    public function create(string $config)
+    {
+        // Inicia config
+        $this->getConfig($config);
+
+        // Cria view
+        return view('admin.default.create')
+            ->with('config', $this->config)
+            ->with('breadcrumbs', $this->getBreadcrumbs('inserir'));
+    }
+    
+    /**
+     * Store padrão
+     * 
+     * @param   string      $config    Config da rota
+     * @param   Request     $request   Dados da requisição
+     * 
+     * @return  Redirect               Index
+     */
+    public function store(string $config, Request $request)
+    {
+        // Inicia config
+        $this->getConfig($config);
+
+        // Inicia controller
+        $controller = $this->controller;
+        $newObj = new $controller();
+
+        // Valida requisição
+        $validator = $this->makeValidation($request, $newObj->getRules());
+        if ($validator) return back()->withInput()->withErrors($validator);
+        
+        // Salva registro
+        $data = $newObj->saveData($request);
+
+        // Redireciona para index
+        return Redirect::route('admin.listar', ['config' => $config])
+            ->with('success', config('message.insert'));
+    }
+
+    /**
+     * Edit padrão
+     * 
+     * @param   string      $config     Config da rota
+     * @param   int         $id         Identificador do registro
+     * 
+     * @return  View
+     */
+    public function edit(string $config, int $id)
+    {
+        // Inicia config
+        $this->getConfig($config);
+
+        // Inicia controller
+        $controller = $this->controller;
+        $newObj = new $controller();
+
+        // Faz busca
+        $data = $newObj->editData($id);
+
+        // Cria view
+        return view('admin.default.edit')
+            ->with('data', $data)
+            ->with('config', $this->config)
+            ->with('breadcrumbs', $this->getBreadcrumbs('editar'));
+    }
+    
+    /**
+     * Update padrão
+     * 
+     * @param   string      $config    Config da rota
+     * @param   int         $id        Identificador do registro
+     * @param   Request     $request   Dados da requisição
+     * 
+     * @return  Redirect               Edit
+     */
+    public function update(string $config, int $id, Request $request)
+    {
+        // Inicia config
+        $this->getConfig($config);
+
+        // Inicia controller
+        $controller = $this->controller;
+        $newObj = new $controller();
+
+        // Valida requisição
+        $validator = $this->makeValidation($request, $newObj->getRules());
+        if ($validator) return back()->withInput()->withErrors($validator);
+        
+        // Atualiza registro
+        $data = $newObj->updateData($request, $id);
+
+        // Redireciona para edit
+        return Redirect::route('admin.editar', ['id' => $id, 'config' => $config])
+                        ->with('success', config('message.update'));
+    }
+
+    /**
+     * Store padrão
+     * 
+     * @param   string      $config    Config da rota
+     * @param   int         $id        Identificador do registro
+     * 
+     * @return  Redirect               Index
+     */
+    public function destroy(string $config, int $id)
+    {
+        // Inicia config
+        $this->getConfig($config);
+
+        // Inicia controller
+        $controller = $this->controller;
+        $newObj = new $controller();
+
+        // Deleta registro
+        $data = $newObj->destroyData($id);
+
+        // Redireciona para index
+        return Redirect::route('admin.listar', ['config' => $config])
+                    ->with('success', config('message.delete'));
     }
 
     /**
@@ -81,80 +226,31 @@ class Controller extends BaseController
     /**
      * Faz validação dos dados da requisição.
      * 
-     * @param   Object      $request        Dados da Requisição
+     * @param   object      $request        Dados da Requisição
+     * @param   array      $request         Dados da Requisição
      * 
-     * @return  Object                      Retorno da validação com Validator
+     * @return  mixed                       Retorno da validação com Validator
      */
-    public function makeValidation($request)
+    public function makeValidation(object $request, array $rules)
     {
-        $validator = Validator::make($request->all(), $this->rules);
+        $validator = Validator::make($request->all(), $rules);
 
         if($validator->fails()) return $validator;
         else return false;
     }
-
-    public function index()
+    
+    /**
+     * Busca config da controller
+     * 
+     * @param   string      $config     Config da rota
+     * @return  object
+     */
+    public function getConfig(string $config): Void
     {
-        return view('admin.default.index')
-                ->with('data', $this->data())
-                ->with('config', $this->config)
-                ->with('thead', $this->config->index->thead)
-                ->with('breadcrumbs', $this->getBreadcrumbs());
-    }
-
-    public function create()
-    {
-        return view('admin.default.create')
-            ->with('config', $this->config)
-            ->with('breadcrumbs', $this->getBreadcrumbs('inserir'));
-    }
-
-    public function store(Request $request)
-    {
-        $validator = $this->makeValidation($request);
-
-        if ($validator) return back()->withInput()->withErrors($validator);
-        
-        $model =  $this->model;
-        $data = $this->saveData(new $model(), $request);
-        $data->save();
-
-        return Redirect::route($this->route)
-            ->with('success', config('message.insert'));
-    }
-
-    public function edit($id)
-    {
-        $model =  $this->model;
-        $data = $model::find($id);
-        return view('admin.default.edit')
-            ->with('data', $data)
-            ->with('config', $this->config)
-            ->with('breadcrumbs', $this->getBreadcrumbs('editar'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $validator = $this->makeValidation($request);
-
-        if ($validator) return back()->withInput()->withErrors($validator);
-        
-        $model = $this->model;
-        $data = $model::find($id);
-        $data = $this->saveData($data, $request);
-        $data->save();
-
-        return Redirect::route($this->edit, ['id' => $id])
-                        ->with('success', config('message.update'));
-    }
-
-    public function destroy($id)
-    {
-        $model = $this->model;
-        $data = $model::find($id);
-        $data->delete();
-
-        return Redirect::route($this->route)
-                    ->with('success', config('message.delete'));
+        $this->config = config($config);
+        $this->label = $this->config->label;
+        $this->route = $this->config->route;
+        $this->model = config('app.model').'\\'.$this->config->model;
+        $this->controller = config('app.controller').'\\'.$this->config->controller;
     }
 }

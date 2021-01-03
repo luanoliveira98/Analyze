@@ -17,8 +17,8 @@
                 <td>{{$item->$tr}}</td>
             @endforeach
             <td>
-                <x-forms.base action="{{route($route.'.excluir', ['id' => $item->id])}}" method="delete">
-                    <x-buttons.link route="{{route($route.'.editar', ['id' => $item->id])}}" color="info" icon="fas fa-pencil-alt" title="Editar"/>
+                <x-forms.base action="{{route('admin.excluir', ['id' => $item->id, 'config' => $route])}}" method="delete">
+                    <x-buttons.link route="{{route('admin.editar', ['id' => $item->id, 'config' => $route])}}" color="info" icon="fas fa-pencil-alt" title="Editar"/>
                     <x-buttons.btn color="danger" icon="fas fa-trash-alt" title="Excluir" size="sm"/>
                 </x-forms.base>
             </td>

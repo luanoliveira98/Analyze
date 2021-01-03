@@ -8,7 +8,7 @@
                 <x-breadcrumbs.base>
                     <x-breadcrumbs.item route="{{route('admin.home')}}" label="Home"/>
                     @foreach ($breadcrumbs as $item)
-                    <x-breadcrumbs.item route="{{route($item->route)}}" label="{{$item->label}}" active="{{$item->active}}"/>
+                    <x-breadcrumbs.item route="{{route('admin.listar', ['config' => $item->route])}}" label="{{$item->label}}" active="{{$item->active}}"/>
                     @endforeach
                 </x-breadcrumbs.base>
             @endif

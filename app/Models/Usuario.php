@@ -9,4 +9,9 @@ class Usuario extends Model
 {
     use softDeletes;
     protected $table = 'usuarios';
+
+    public function scopeAdministracao($query)
+    {
+        return $query->where('nivel', 'administracao');
+    }
 }

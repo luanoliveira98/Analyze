@@ -6,27 +6,11 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::get('/',         'HomeController@index')->name('home');
     Route::get('/logout',   'HomeController@index')->name('logout');
 
-    Route::name('membros.')->prefix('/membros')->group(function () {
-        Route::get('/administracao',    'HomeController@index')->name('administracao');
-        Route::get('/staff',            'HomeController@index')->name('staff');
-        Route::get('/elenco',           'HomeController@index')->name('elenco');
-    });
 
-    Route::name('equipes.')->prefix('/equipes')->group(function () {
-        Route::get('/',         'EquipeController@index')->name('listar');
-        Route::get('/inserir',  'EquipeController@create')->name('inserir');
-        Route::post('/',        'EquipeController@store')->name('salvar');
-        Route::get('/{id}',     'EquipeController@edit')->name('editar');
-        Route::put('/{id}',     'EquipeController@update')->name('atualizar');
-        Route::delete('/{id}',  'EquipeController@destroy')->name('excluir');
-    });
-
-    Route::name('adversarios.')->prefix('/adversarios')->group(function () {
-        Route::get('/',         'AdversarioController@index')->name('listar');
-        Route::get('/inserir',  'AdversarioController@create')->name('inserir');
-        Route::post('/',        'AdversarioController@store')->name('salvar');
-        Route::get('/{id}',     'AdversarioController@edit')->name('editar');
-        Route::put('/{id}',     'AdversarioController@update')->name('atualizar');
-        Route::delete('/{id}',  'AdversarioController@destroy')->name('excluir');
-    });
+    Route::get('/{config}',          'Controller@index')->name('listar');
+    Route::get('/{config}/inserir',  'Controller@create')->name('inserir');
+    Route::post('/{config}',         'Controller@store')->name('salvar');
+    Route::get('/{config}/{id}',     'Controller@edit')->name('editar');
+    Route::put('/{config}/{id}',     'Controller@update')->name('atualizar');
+    Route::delete('/{config}/{id}',  'Controller@destroy')->name('excluir');
 });
