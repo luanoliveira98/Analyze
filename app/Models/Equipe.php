@@ -25,4 +25,16 @@ class Equipe extends Model
     {
         return $query->where('b_adversario', 1);
     }
+
+    /**
+     * Cria array de regras para validação
+     * 
+     * @return  array
+     */
+    public static function getRules(): array
+    {
+        return [
+            'nome' => 'required'
+        ];
+    }
 }

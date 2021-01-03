@@ -1,11 +1,17 @@
 <?php
+
+use App\Models\Equipe;
+
 return (object) [
     "label" => "Equipes",
     "active" => "equipes",
     "model" => "Equipe",
-    "controller" => "EquipeController",
     "route" => "equipes",
     "index" => (object)[
+        "data" => function(array $select): object 
+        {
+            return Equipe::select($select)->lines()->get();
+        },
         "title" => "Lista de Equipes",
         "thead" => ['nome', 'nivel'],
         "select" => ['id','nome', 'nivel']

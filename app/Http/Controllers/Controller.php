@@ -38,10 +38,16 @@ class Controller extends BaseController
         // Inicia config
         $this->getConfig($config);
 
-        // Faz busca para listar
-        $controller = $this->controller;
-        $newObj = new $controller();
-        $data = $newObj->data($this->config->index->select);
+        // Faz busca
+        if(isset($this->config->index->data)) {
+            // Busca na config?
+            $select = $this->config->index->data;
+            $data = $select($this->config->index->select);
+        } else {
+            // Busca padrão?
+            $model = $this->model;
+            $data = $model::all();
+        }
 
         //Cria view
         return view('admin.default.index')
@@ -82,16 +88,20 @@ class Controller extends BaseController
         // Inicia config
         $this->getConfig($config);
 
-        // Inicia controller
-        $controller = $this->controller;
-        $newObj = new $controller();
-
         // Valida requisição
-        $validator = $this->makeValidation($request, $newObj->getRules());
+        $validator = $this->makeValidation($request);
         if ($validator) return back()->withInput()->withErrors($validator);
         
         // Salva registro
-        $data = $newObj->saveData($request);
+        if(isset($this->config->create->save)) {
+            // Salva na config?
+            $save = $this->config->create->save;
+            $data = $save($request->except('_token'));
+        } else {
+            // Salva padrão?
+            $model = $this->model;
+            $data = $model::insert($request->except('_token'));
+        }
 
         // Redireciona para index
         return Redirect::route('admin.listar', ['config' => $config])
@@ -110,13 +120,17 @@ class Controller extends BaseController
     {
         // Inicia config
         $this->getConfig($config);
-
-        // Inicia controller
-        $controller = $this->controller;
-        $newObj = new $controller();
-
-        // Faz busca
-        $data = $newObj->editData($id);
+ 
+        // Busca registro
+        if(isset($this->config->edit->data)) {
+            // Busca na config?
+            $data = $this->config->edit->data;
+            $data = $data($id);
+        } else {
+            // Busca padrão?
+            $model = $this->model;
+            $data = $model::find($id);
+        }
 
         // Cria view
         return view('admin.default.edit')
@@ -139,16 +153,20 @@ class Controller extends BaseController
         // Inicia config
         $this->getConfig($config);
 
-        // Inicia controller
-        $controller = $this->controller;
-        $newObj = new $controller();
-
         // Valida requisição
-        $validator = $this->makeValidation($request, $newObj->getRules());
+        $validator = $this->makeValidation($request);
         if ($validator) return back()->withInput()->withErrors($validator);
         
         // Atualiza registro
-        $data = $newObj->updateData($request, $id);
+        if(isset($this->config->edit->update)) {
+            // Atualiza na config?
+            $update = $this->config->edit->update;
+            $data = $update($request->except('_token', '_method'), $id);
+        } else {
+            // Atualiza padrão?
+            $model = $this->model;
+            $data = $model::where('id', $id)->update($request->except('_token', '_method'));
+        }
 
         // Redireciona para edit
         return Redirect::route('admin.editar', ['id' => $id, 'config' => $config])
@@ -168,12 +186,16 @@ class Controller extends BaseController
         // Inicia config
         $this->getConfig($config);
 
-        // Inicia controller
-        $controller = $this->controller;
-        $newObj = new $controller();
-
         // Deleta registro
-        $data = $newObj->destroyData($id);
+        if(isset($this->config->delete)) {
+            // Deleta na config?
+            $delete = $this->config->delete;
+            $data = $delete($id);
+        } else {
+            // Deleta padrão?
+            $model = $this->model;
+            $data = $model::destroy($id);
+        }
 
         // Redireciona para index
         return Redirect::route('admin.listar', ['config' => $config])
@@ -227,13 +249,12 @@ class Controller extends BaseController
      * Faz validação dos dados da requisição.
      * 
      * @param   object      $request        Dados da Requisição
-     * @param   array      $request         Dados da Requisição
      * 
      * @return  mixed                       Retorno da validação com Validator
      */
-    public function makeValidation(object $request, array $rules)
+    public function makeValidation(object $request)
     {
-        $validator = Validator::make($request->all(), $rules);
+        $validator = Validator::make($request->all(), $this->getRules());
 
         if($validator->fails()) return $validator;
         else return false;
@@ -251,6 +272,16 @@ class Controller extends BaseController
         $this->label = $this->config->label;
         $this->route = $this->config->route;
         $this->model = config('app.model').'\\'.$this->config->model;
-        $this->controller = config('app.controller').'\\'.$this->config->controller;
+    }
+    
+    /**
+     * Busca regras de validação da model
+     * 
+     * @return  array
+     */
+    public function getRules(): array
+    {
+        $model = $this->model;
+        return $model::getRules();
     }
 }
